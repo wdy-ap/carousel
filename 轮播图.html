@@ -4,74 +4,76 @@
         <meta charset="utf-8">
         <title>轮播图</title>
         <style>
-                   display:inline-block;
-               }
+              #pic-container {
+                  position: relative;
+                  display: inline-block;
+              }
 
-               .pic {
-                   display: none;
-               }
+              .picShow {
+                  display: block !important;
+              }
 
-               .active {
-                   display:block !important;
-               }
+              .roundHighlight {
+                  background: black !important;
+              }
 
-               .round {
-                   display: inline-block;
-                   width: 13px;
-                   height: 13px;
-                   background: white;
-                   border-radius: 50%;
-               }
+              img {
+                  display: none;
+              }
 
-               .round-container {
-                   display: inline-block;
-                   position: absolute;
-                   left: 50%;
-                   transform: translateX(-50%);
-                   bottom: 30px;
-               }
+              #round-container {
+                  display: inline-block;
+                  position: absolute;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  bottom: 30px;
+              }
 
-               .round-active {
-                   background: black;
-               }
+              .round {
+                  display: inline-block;
+                  width: 13px;
+                  height: 13px;
+                  background: white;
+                  border-radius: 50%;
+              }
 
-               .square {
-                   font-size: 20px;
-                   display: inline-block;
-                   position: absolute;
-                   top: 50%;
-                   transform: translateY(-50%);
-                   width: 30px;
-                   height: 30px;
-                   opacity: 0.5;
-                   background: lightgray;
-                   text-align: center;
-               }
+              .button {
+                  font-size: 20px;
+                  display: inline-block;
+                  position: absolute;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  width: 30px;
+                  height: 30px;
+                  opacity: 0.5;
+                  background: lightgray;
+                  text-align: center;
+              }
 
-               #id-left {
-                   left: 0px;
-               }
+              #left {
+                  left: 0px;
+              }
 
-               #id-right {
-                   right: 0px;
-               }
+              #right {
+                  right: 0px;
+              }
         </style>
     </head>
     <body>
-        <div class='container'>
-            <img src='./pics/1.jpg' class='pic active' id='id-1'>
-            <img src='./pics/2.jpg' class='pic' id='id-2'>
-            <img src='./pics/3.jpg' class='pic' id='id-3'>
-            <div class='round-container'>
-                <span class='round round-active' data-index='1'></span>
-                <span class='round' data-index='2'></span>
-                <span class='round' data-index='3'></span>
+        <div id='pic-container' data-index='0'>
+            <img src='./pics/0.jpg' class='pic picShow' id='pic-0'>
+            <img src='./pics/1.jpg' class='pic' id='pic-1'>
+            <img src='./pics/2.jpg' class='pic' id='pic-2'>
+            <div id='button-container'>
+                <div id='left' class='button' data-index='-1'> < </div>
+                <div id='right' class='button' data-index='1'> > </div>
             </div>
-            <div class='squares'>
-                <div class='square' id='id-left' data-index='-1'> < </div>
-                <div class='square' id='id-right' data-index='1'> > </div>
+            <div id='round-container'>
+                <span class='round roundHighlight' id='round-0'></span>
+                <span class='round' id='round-1'></span>
+                <span class='round' id='round-2'></span>
             </div>
         </div>
-        <script src='轮播图.js'></script>
     </body>
+    <script src='./轮播图.js'></script>
 </html>
