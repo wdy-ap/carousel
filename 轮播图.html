@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>轮播图</title>
+        <style>
+               .container {
+                   position: relative;
+                   display:inline-block;
+               }
+
+               .pic {
+                   display: none;
+               }
+
+               .active {
+                   display:block !important;
+               }
+
+               .round {
+                   display: inline-block;
+                   width: 13px;
+                   height: 13px;
+                   background: white;
+                   border-radius: 50%;
+               }
+
+               .round-container {
+                   display: inline-block;
+                   position: absolute;
+                   left: 50%;
+                   transform: translateX(-50%);
+                   bottom: 30px;
+               }
+
+               .round-active {
+                   background: black;
+               }
+
+               .square {
+                   font-size: 20px;
+                   display: inline-block;
+                   position: absolute;
+                   top: 50%;
+                   transform: translateY(-50%);
+                   width: 30px;
+                   height: 30px;
+                   opacity: 0.5;
+                   background: lightgray;
+                   text-align: center;
+               }
+
+               #id-left {
+                   left: 0px;
+               }
+
+               #id-right {
+                   right: 0px;
+               }
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <img src='./pics/1.jpg' class='pic active' id='id-1'>
+            <img src='./pics/2.jpg' class='pic' id='id-2'>
+            <img src='./pics/3.jpg' class='pic' id='id-3'>
+            <div class='round-container'>
+                <span class='round round-active' data-index='1'></span>
+                <span class='round' data-index='2'></span>
+                <span class='round' data-index='3'></span>
+            </div>
+            <div class='squares'>
+                <div class='square' id='id-left' data-index='-1'> < </div>
+                <div class='square' id='id-right' data-index='1'> > </div>
+            </div>
+        </div>
+        <script src='轮播图.js'></script>
+    </body>
+</html>
