@@ -15,11 +15,11 @@
 > 每隔一秒钟，检查图片container的自定义属性index并+1，显示相应的图片，并更新到pic-container的index
 
 #### 重叠的功能/封装的功能
-> 所有的图片移除show这个属性
-> 当前数字的图片增加show这个属性
-> 所有的圆点移除show这个属性
-> 当前的圆点增加show这个属性
-> 将index更新到pic-container
+> 所有的图片移除show这个属性<br>
+> 当前数字的图片增加show这个属性<br>
+> 所有的圆点移除show这个属性<br>
+> 当前的圆点增加show这个属性<br>
+> 将index更新到pic-container<br>
 
 
 
