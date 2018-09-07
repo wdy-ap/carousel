@@ -1,1 +1,1 @@
-![Image text](https://github.com/wdy-ap/carousel/img-folder/1.png)
+![Image text](carousel/img-folder/1.png)
