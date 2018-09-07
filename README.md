@@ -1,3 +1,3 @@
-![Image text](./img-folder/1.png)
-![Image text](./img-folder/2.png)
-![Image text](./img-folder/3.png)
+![图片1没显示吗？](/pics/1.png)
+![图片2没显示吗？](/pics/2.png)
+![图片3没显示吗？](/pics/3.png)
