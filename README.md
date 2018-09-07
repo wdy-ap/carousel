@@ -8,12 +8,11 @@
 
 ### 功能实现
 #### 左右按钮切换图片
-> 点击按钮，获取pic-container的自定义属性index，结合发生事件按钮自身的自定义属性index，得出下一张要显示的图片，并更新到pic-container的index
+> 点击按钮，获取pic-container的自定义属性index，结合发生事件按钮自身的自定义属性index，得出下一张要显示的图片
 #### 圆点导航
-> 鼠标移动到某圆点，拿到自定义属性index，显示相应的图片，并更新到pic-container的index
+> 鼠标移动到某圆点，拿到自定义属性index，显示相应的图片
 #### 自动播放
-> 每隔一秒钟，检查图片container的自定义属性index并+1，显示相应的图片，并更新到pic-container的index
-
+> 每隔一秒钟，检查pic-container的自定义属性index并+1，显示相应的图片
 #### 重叠的功能/封装的功能
 > 所有的图片移除show这个属性<br>
 > 当前数字的图片增加show这个属性<br>
