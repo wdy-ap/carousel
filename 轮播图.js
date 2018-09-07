@@ -1,103 +1,87 @@
 var log = console.log.bind(console)
+var e = selector => document.querySelector(selector)
+var es = selector => document.querySelectorAll(selector)
 
-var e = function(selector) {
-    var element = document.querySelector(selector)
-    if (element == null) {
-        var s = `元素没找到，选择器 ${selector} 没有找到或者 js 没有放在 body 里`
-        alert(s)
-    } else {
-        return element
-    }
+// 将图片和圆点的id剪成数字
+var idNumber = element => {
+    var id = element.getAttribute('id')
+    var idNum = Number(id.slice(-1))
+    return idNum
 }
 
-var es = function(selector) {
-    var elements = document.querySelectorAll(selector)
-    if (elements.length == 0) {
-        var s = `元素没找到，选择器 ${selector} 没有找到或者 js 没有放在 body 里`
-        alert(s)
-    } else {
-        return elements
-    }
+// 得出当前pic-container的自定义index属性
+var picContainerIndex = () => {
+    var picContainer = e('#pic-container')
+    var pcIndex = Number(picContainer.dataset.index)
+    return pcIndex
 }
 
-var idFinder = index => e(`#id-${index}`)
+// 更新pic-container的自定义index属性
+var updatePcIndex = (index) => {
+    var picContainer = e('#pic-container')
+    picContainer.dataset.index = index
 
-var activeClear = () => {
+}
+
+// 所有图片删除show属性，当前数字的图片增加show属性
+// 所有圆点删除高亮属性，当前数字的图片增加高亮属性
+var active = index => {
     var pics = es('.pic')
-    for (var i = 0; i < 3; i++) {
-        pics[i].classList.remove('active')
+    for (var i = 0; i < pics.length; i++) {
+        pics[i].classList.remove('picShow')
+        var id = idNumber(pics[i])
+        if (id === index) {
+            pics[i].classList.add('picShow')
+        }
     }
     var rounds = es('.round')
-    for (var i = 0; i < 3; i++) {
-        rounds[i].classList.remove('round-active')
+    for (var i = 0; i < rounds.length; i++) {
+        rounds[i].classList.remove('roundHighlight')
+        var id = idNumber(pics[i])
+        if (id === index) {
+            rounds[i].classList.add('roundHighlight')
+        }
     }
 }
 
-var leftRight = () => {
-    var squares = e('.squares')
-    squares.addEventListener('click', function() {
+// 利用事件委托，当点击左右按钮的时候页面发生如上变化
+var buttonsControl = () => {
+    var buttonContainer = e('#button-container')
+    buttonContainer.addEventListener('click', () => {
         var self = event.target
-        if (self.classList.contains('square')) {
-            var number = Number(self.dataset.index)
-            var pics = es('.pic')
-            for (var i = 0; i < 3; i++) {
-                if (pics[i].classList.contains('active')) {
-                    break
-                }
-            }
-            var number = (i + number + 3) % 3 + 1
-            var picActive = idFinder(number)
-            activeClear()
-            picActive.classList.add('active')
-            var rounds = es('.round')
-            for (var i = 0; i < 3; i++) {
-                if (rounds[i].dataset.index === String(number)) {
-                    rounds[i].classList.add('round-active')
-                }
-            }
-        }
+        var buttonIndex = Number(self.dataset.index)
+        var pcIndex = picContainerIndex()
+        var newIndex = (buttonIndex + pcIndex + 3) % 3
+        active(newIndex)
+        updatePcIndex(newIndex)
     })
 }
 
-var roundHover = () => {
-    var roundContainer = e(".round-container")
-    roundContainer.addEventListener('mouseover', function() {
+// 利用事件委托，当鼠标移动到圆点上的时候页面发生如上变化
+var roundControl = () => {
+    var roundContainer = e('#round-container')
+    roundContainer.addEventListener('mouseover', () => {
         var self = event.target
         if (self.classList.contains('round')) {
-            var index = self.dataset.index
-            var picActive = idFinder(index)
-            activeClear()
-            self.classList.add('round-active')
-            picActive.classList.add('active')
+            var index = idNumber(self)
+            active(index)
+            updatePcIndex(index)
         }
     })
 }
 
-var automatic = () => {
-    setInterval(function() {
-        var pics = es('.pic')
-        for (var i = 0; i < 3; i++) {
-            if (pics[i].classList.contains('active')) {
-                break
-            }
-        }
-        var number = (i + 1) % 3 + 1
-        var picActive = idFinder(number)
-        activeClear()
-        picActive.classList.add('active')
-        var rounds = es('.round')
-        for (var i = 0; i < 3; i++) {
-            if (rounds[i].dataset.index === String(number)) {
-                rounds[i].classList.add('round-active')
-            }
-        }
-    }, 2000)
+// 每二秒页面的变化，传递给setInterval备用
+var clock = () => {
+    var pcIndex = picContainerIndex()
+    var newIndex = (pcIndex + 1 + 3) % 3
+    active(newIndex)
+    updatePcIndex(newIndex)
 }
 
-var __main = () => {
-    leftRight()
-    roundHover()
-    automatic()
+var main = () => {
+    buttonsControl()
+    roundControl()
+    setInterval(clock, 2000)
 }
 
-__main()
+main()
